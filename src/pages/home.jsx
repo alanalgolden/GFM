@@ -5,7 +5,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       <div className="h1">Gluten Free Me</div>
       <button
         className="button-base"

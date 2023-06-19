@@ -4,10 +4,6 @@
 
 #root {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   @apply text-white;
   @apply bg-slate-900;
 }
@@ -27,4 +23,5 @@
   @apply bg-slate-700;
   @apply hover:bg-slate-800;
   @apply focus:outline-none;
+  max-width: 45%;
 }
