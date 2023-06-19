@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @apply text-white;
+  @apply bg-slate-900;
+}
+
+.h1 {
+  @apply text-4xl;
+  @apply font-bold;
+  @apply mb-4;
+}
+
+.button-base {
+  @apply px-4;
+  @apply py-2;
+  @apply rounded;
+  @apply text-white;
+  @apply font-bold;
+  @apply bg-slate-700;
+  @apply hover:bg-slate-800;
+  @apply focus:outline-none;
+}
