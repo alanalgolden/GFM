@@ -5,6 +5,7 @@ import {
   langchainRes2,
   langchainRes3,
 } from "../../utils/langchain/firstchain.jsx";
+import run from "../../utils/api/pinecone/index-strings.jsx";
 
 const Topbar = () => {
   const { user } = useContext(UserContext);
@@ -23,6 +24,9 @@ const Topbar = () => {
         className="button-base text-sm mx-2"
       >
         Langchain Test
+      </button>
+      <button onClick={() => run()} className="button-base text-sm mx-2">
+        Embeddings Test
       </button>
     </div>
   );

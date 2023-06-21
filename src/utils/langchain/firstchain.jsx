@@ -1,4 +1,4 @@
-import { model } from "./langchain-config.jsx";
+import { model } from "./langchain-config";
 import { PromptTemplate } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 

@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^0.1.6",
+    "@xenova/transformers": "^2.2.0",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "firebase": "^9.22.2",
     "langchain": "^0.0.96",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.13.0"
+    "react-router-dom": "^6.13.0",
+    "util": "^0.12.5",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
