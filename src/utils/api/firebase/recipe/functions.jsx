@@ -29,9 +29,9 @@ import { db } from "../../firebase/firebase-config";
   }
 };
  */
-
 // ~~~~~~~~~~~~~~~~ //
 
+// string vars
 const recipes = "recipes";
 
 export const recipeGetDoc = async (recipeId) => {
@@ -54,11 +54,9 @@ export const recipeCreate = async (userId, recipe) => {
       userId: userId,
       created: serverTimestamp(),
       lastModified: serverTimestamp(),
-      //Make the access be recipe.name
       nameOrigin: recipe.recipeName,
       nameChanges: recipe.recipeName,
       nameActiveChanges: recipe.recipeName,
-      //Make ingredients in an array
       ingredientsOrigin: recipe.recipeIngredients,
       ingredientsChanges: recipe.recipeIngredients,
       ingredientsActiveChanges: recipe.recipeIngredients,
@@ -67,12 +65,9 @@ export const recipeCreate = async (userId, recipe) => {
       //historyID: ["test7", "test8"],
     });
 
-    //const docRef = collection(db, "recipes");
-    //const docData = doc;
-
     const doc = await recipeGetDoc(docRef.id);
     // LOGS
-    console.log(doc);
+    console.log(`recipeCreate Success! Doc: ${doc}`);
 
     return docRef;
   } catch (e) {
