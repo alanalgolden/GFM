@@ -60,12 +60,12 @@ const Topbar = () => {
       </button>
       <button
         onClick={() => {
-          userModifyDoc(user.uid, "activeRecipes", [
-            "tuna salad",
-            "chicken salad",
-            "pasta salad",
-            "garden salad",
-            "salad",
+          userModifyDoc(user.uid, "Users", "activeRecipeNames", [
+            "marmalade",
+            "grape jelly",
+            "strawberry jelly",
+            "peanut butter",
+            "butter",
           ]);
         }}
       >

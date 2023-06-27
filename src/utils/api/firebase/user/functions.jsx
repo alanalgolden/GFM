@@ -18,7 +18,7 @@ import { useContext } from "react";
 
 // ~~~~~~~~~~~~~~~~ //
 // Core Copy //
-/* export const fetchIngredientsTEST = async (uid) => {
+export const fetchIngredientsTEST = async (uid) => {
   const docRef = doc(db, "userPantryIngredients", uid);
 
   try {
@@ -30,28 +30,48 @@ import { useContext } from "react";
     console.log(`Error fetching doc data: ${e}`);
   }
 };
- */
+
 // ~~~~~~~~~~~~~~~~ //
 
-export const userModifyDoc = async (uid, field, data) => {
-  const userDoc = await userCheckForField(uid, field);
+export const userModifyDoc = async (uid, collection, property, data) => {
+  const userDoc = await userCheckForProperty(uid, collection, property);
   console.log(userDoc);
 
-  if (userDoc) {
-    switch (field) {
-      case "activeRecipes":
-        userUpdateActiveRecipeNames(data);
+  if (userDoc === true) {
+    switch (property) {
+      case "activeRecipeNames":
+        console.log("Update Active Recipes");
+        userUpdateActiveRecipeNames(uid, data);
         break;
     }
   } else {
-    switch (field) {
-      case "activeRecipes":
+    switch (property) {
+      case "activeRecipeNames":
+        console.log("Create Active Recipes");
         userCreateActiveRecipeNames(uid, data);
         break;
     }
   }
 };
 
+// NOTE - This function will store the previous recipe names in the user doc
+async function userUpdateActiveRecipeNames(uid, data) {
+  const docRef = doc(db, "Users", uid);
+
+  try {
+    const prevRecipes = await getDocFromServer(docRef);
+    console.log(prevRecipes.data().activeRecipeNames);
+    const saveRecipes = await updateDoc(docRef, {
+      prevRecipeNames: prevRecipes.data().activeRecipeNames,
+    });
+    const res = await updateDoc(docRef, { activeRecipeNames: data });
+    return;
+  } catch (e) {
+    console.log(`Error updating ActiveRecipeNames user doc: ${e}`);
+  }
+}
+
+// NOTE - This function will create the active recipe names in the user doc, if it doesn't exist yet
 async function userCreateActiveRecipeNames(uid, data) {
   const docRef = doc(db, "Users", uid);
 
@@ -63,27 +83,25 @@ async function userCreateActiveRecipeNames(uid, data) {
   }
 }
 
-// why is this throwing an error? fix tomorrow
-async function userCheckForField(uid, field) {
-  const doc = await getDocFromServer(uid);
+async function userCheckForProperty(uid, collection, property) {
+  const docRef = doc(db, collection, uid);
 
   try {
-    const data = doc.data();
+    const docGet = await getDocFromServer(docRef);
+    const docData = docGet.data();
 
-    if (doc.hasOwnProperty(field)) {
-      console.log("returning true");
+    if (docData.hasOwnProperty(property)) {
       return true;
     } else {
-      console.log("returning false");
       return false;
     }
   } catch (e) {
-    console.log(`Error checking for user field: ${e}`);
+    console.log(`Error checking for user property: ${e}`);
   }
 }
 
-const userAddToDoc = async (userId, addField, addData) => {};
-
-async function userUpdateDoc(userId, updateField, updateData) {
+async function userUpdateDoc(userId, updateproperty, updateData) {
   const docRef = doc(db, "users", userId);
 }
+
+const userAddToDoc = async (userId, addproperty, addData) => {};
